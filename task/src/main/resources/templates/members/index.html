@@ -1,0 +1,46 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>メンバーページ</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container mt-4">
+		<h1 class="h5">メンバーページ</h1>
+		<p th:text="${username}"></p>
+		    <div class="col-auto">
+				<form class="mb-2" th:action="@{/users/create/form/}" th:method="post">
+					<button class="btn btn-outline-dark" type="submit">新規作成</button>
+				</form>
+			</div>
+			<table class="table table-striped">
+			<thead>
+				<tr><th>社員番号</th><th>名前</th><th>年齢</th></tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${list}">
+				    <td th:text="${user.id}"></td>
+					<td th:text="${user.name}"></td>
+					<td th:text="${user.age}"></td>
+					<td>
+	    				<form th:action="@{/users/update/form/{id}(id=${user.id})}" th:method="post">
+	    					<button class="btn btn-outline-dark btn-block" type="submit">編集</button>
+	    				</form>
+	    			</td>
+	    			<td>
+	    				<form th:action="@{/users/delete/confirm/{id}(id=${user.id})}" th:method="post">
+	    					<button class="btn btn-outline-dark btn-block" type="submit">削除</button>
+	    				</form>
+	    			</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<form role="form" id="logout" th:action="@{/logout}" method="post">
+    		<button class="btn btn-outline-dark btn-block" type="submit">ログアウト</button>
+		</form>
+	</div>
+</body>
+</html>

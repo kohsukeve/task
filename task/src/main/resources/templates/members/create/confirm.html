@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>新規作成確認</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}">
+    <script th:href="@{webjars/jquery/3.5.1/js/jquery.min.js}"></script>
+    <script th:href="@{webjars/bootstrap/4.5.3/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container mt-4">
+	    <h1 class="h5">新規作成確認</h1>
+		<table class="table table-striped" th:object="${memberForm}">
+			<thead>
+				<tr><th>名前</th><th>年齢</th></tr>
+			</thead>
+			<tbody>
+				<tr>
+	    			<td th:text="*{name}"></td>	    			
+	    			<td th:text="*{age}"></td>
+	    			
+    			</tr>
+   			</tbody>
+   		</table>
+    			
+   		<form class="d-inline" th:action="@{/users/create/}" th:object="${memberForm}" th:method="post">
+   			<input type="hidden" th:field="*{name}"/>
+   			<!-- <input type="hidden" th:field="*{gender}"/> -->
+   			<input type="hidden" th:field="*{age}"/>
+ 
+   			<button class="btn btn-outline-dark" type="submit">追加</button>
+   		</form>
+   		<form class="d-inline" th:action="@{/users/create/form/}" th:object="${memberForm}" th:method="post">
+   			<input type="hidden" th:field="*{name}"/>
+   			<!-- <input type="hidden" th:field="*{gender}"/> -->
+   			<input type="hidden" th:field="*{age}"/>
+
+			<button class="btn btn-outline-dark" type="submit">戻る</button>
+		</form>
+	</div>
+</body>
+</html>
